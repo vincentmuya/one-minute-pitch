@@ -1,8 +1,10 @@
 class Config:
-     '''
+    '''
     General configuration parent class
     '''
     pass
+
+
 
 class ProdConfig(Config):
     '''
@@ -12,6 +14,7 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
     pass
+
 
 class DevConfig(Config):
     '''
