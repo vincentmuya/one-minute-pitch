@@ -9,6 +9,33 @@
         {% endif %}
     </head>
   <body>
-
+    <!-- Pickup Pitches section  -->
+       <h3> Pickup Pitches</h3>
+        <ul>
+           {% for pickup_pitch in pickup %}
+               <li>{{ pickup_pitch.author}}</li>
+           {% endfor %}
+       </ul>
+      <!-- interview pitch -->
+      <h3>Interview Pitches</h3>
+      <ul>
+        {% for interview_pitch in interview %}
+            <li>{{ interview_pitch.author}}</li>
+        {% endfor %}
+      </ul>
+      <!-- product pitches -->
+      <h3>Product Pitches</h3>
+      <ul>
+        {% for product_pitch in product %}
+            <li>{{ product_pitch.author}}</li>
+        {% endfor %}
+      </ul>
+      <!-- promotion pitches -->
+      <h3>Promotion Pitches</h3>
+      <ul>
+        {% for promotion_pitch in promotion %}
+            <li>{{ promotion_pitch.author}}</li>
+        {% endfor %}
+      </ul>
   </body>
 </html>
