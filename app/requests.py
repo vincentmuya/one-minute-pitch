@@ -1,7 +1,7 @@
 from app import app
-from .models import pitch
+from .models import pitches
 
-Pitch = pitch.Pitch
+Pitches = pitches.Pitches
 
 # Getting pitch
 pitch = app.config['PITCH']
@@ -12,6 +12,10 @@ def get_pitches(category):
     Function that gets the pitch response request
     '''
     get_pitches = format(category)
+
+    with open(get_pitches) as pitches:
+        get_pitches_data = read()
+        get_pitches_response = loads(get_pitches_data)
 
     pitch_results = None
 

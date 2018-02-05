@@ -1,4 +1,4 @@
-class Pitch:
+class Pitches:
     '''
     Pitch class to define Pitch Objects
     '''

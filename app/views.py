@@ -11,9 +11,7 @@ def index():
 
     # Getting pickup lines pitches
     pickup_pitches = get_pitches('pickup')
-    interview_pitch = get_interview_pitch('interview')
-    product_pitch = product_pitch('product')
-    promotion_pitch = promotion_pitch('promotion')
+    print(pickup_pitches)
 
     title = 'Home - One Minute Pitch'
     return render_template('index.html', title = title, pickup = pickup_pitches, interview = interview_pitch, product = product_pitch, promotion = product_pitch)
