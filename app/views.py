@@ -14,5 +14,5 @@ def index():
         # pickup_pitches = get_pitches()
         # print(pickup_pitches)
 
-    # title = 'Home - One Minute Pitch'
-    return render_template('index.html')
+    title = 'Home - One Minute Pitch'
+    return render_template('index.html', title = title)
