@@ -1,6 +1,6 @@
 from flask import render_template
 from app import app
-from .requests import get_pitches
+from app.models import pitches
 
 @app.route('/')
 def index():
@@ -10,8 +10,9 @@ def index():
     '''
 
     # Getting pickup lines pitches
-    pickup_pitches = get_pitches('pickup')
-    print(pickup_pitches)
+    # def get_pitches(category):
+        # pickup_pitches = get_pitches()
+        # print(pickup_pitches)
 
-    title = 'Home - One Minute Pitch'
-    return render_template('index.html', title = title, pickup = pickup_pitches, interview = interview_pitch, product = product_pitch, promotion = product_pitch)
+    # title = 'Home - One Minute Pitch'
+    return render_template('index.html')
