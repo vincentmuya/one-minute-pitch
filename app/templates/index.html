@@ -1,15 +1,9 @@
+{% extends 'base.html'%}
 {% import 'macros.html' as macro%}
-<!DOCTYPE html>
-<html>
-<head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> One Minute Pitch </title>
-        {% endif %}
-    </head>
-  <body>
+
+<!-- Content block -->
+{% block content %}
+
     <!-- Pickup Pitches section  -->
        <h3> Pickup Pitches</h3>
         <ul>
@@ -30,5 +24,5 @@
       <ul>
          {{ macro.displayPitchList(promotion)}}
       </ul>
-  </body>
-</html>
+      
+  {% endblock%}
