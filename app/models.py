@@ -1,6 +1,12 @@
 from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import LoginManager
+from flask_login import UserMixin
+from . import login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -16,15 +22,16 @@ class Pitches:
         self.id =id
         self.author = author
         self.pitch = pitch
-        self.vote_average = vote_average
         self.vote_count = vote_count
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
+    email = db.Column(db.String(225),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    password_hash = db.Column(db.String(225))
     pass_secure = db.Column(db.String(255))
 
 
