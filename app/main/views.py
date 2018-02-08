@@ -29,7 +29,8 @@ def new_pitch():
         return redirect(url_for('pitch'))
     return render_template('new_pitch.html',pitch_form=form)
 
-@main.route('/user/<username>')
+@main.route('/user/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
