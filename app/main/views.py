@@ -3,7 +3,7 @@ from . import main
 from app.models import Pitches
 from flask_login import login_required,login_manager,current_user
 from app.models import Pitches
-from .forms import PitchForm,UpdateProfile
+from .forms import CommentForm,PitchForm,UpdateProfile
 from .. import db,photos
 
 
@@ -13,6 +13,12 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
+    form= CommentForm()
+    if form.validate_on_submit():
+        comment = form.comment.data
+        new_comment = Comment(comment=comment)
+        new_comment.save_pitch()
+        return redirect(url_for('main.index'))
 
     music=Pitches.query.filter_by(category='music').all()
     life=Pitches.query.filter_by(category='life').all()
@@ -22,7 +28,7 @@ def index():
     promotion=Pitches.query.filter_by(category='promotion').all()
 
     title = 'Home - One Minute Pitch'
-    return render_template('index.html', title = title,life=life,music = music,pickup=pickup,interview=interview,production=production,promotion=promotion)
+    return render_template('index.html', title = title,life=life,music = music,pickup=pickup,interview=interview,production=production,promotion=promotion,comment_form=form)
 
 @main.route('/create/new', methods = ['GET','POST'])
 @login_required
@@ -47,7 +53,7 @@ def create():
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
-    user = User.query.filter_by(username = uname).first()
+    user = User.query.filter_by(uname = uname).first()
 
     if user is none:
         abort(404)
