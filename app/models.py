@@ -3,26 +3,39 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import LoginManager
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
 
 
-class Pitches:
+
+class Pitches(db.Model):
     '''
     Pitch class to define Pitch Objects
     '''
+    __tablename__ = 'pitches'
 
-    def __init__(self,id,author,pitch,vote_average,vote_count):
-        self.id =id
+    id = db.Column(db.Integer,primary_key = True)
+    category = db.Column(db.String(225))
+    author = db.Column(db.String(225))
+    pitch = db.Column(db.String())
+
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_pitch(cls,category):
+        pitch = Pitches.query.filter_by(category=category).all()
+        return pitch
+
+    def __init__(self,category,author,pitch):
+        self.category = category
         self.author = author
         self.pitch = pitch
-        self.vote_count = vote_count
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -34,7 +47,7 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(225))
-    pass_secure = db.Column(db.String(255))
+    # pass_secure = db.Column(db.String(255))
 
 
     @property
@@ -43,11 +56,11 @@ class User(UserMixin,db.Model):
 
     @password.setter
     def password(self, password):
-        self.pass_secure = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
 
     def verify_password(self,password):
-        return check_password_hash(self.pass_secure,password)
+        return check_password_hash(self.password_hash,password)
 
     def __repr__(self):
         return f'User {self.username}'

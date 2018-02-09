@@ -1,9 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField
+from wtforms import StringField,TextAreaField,SubmitField,SelectField
 from wtforms.validators import Required
 
 class PitchForm(FlaskForm):
-    category = StringField('Pitch Category', validators=[Required()])
+    category = SelectField('Pitch Category',choices=[('music','music'),
+                                                        ('life','life'),
+                                                        ('pickup','Pickup Pitch'),
+                                                        ('interview','Interview Pitch'),
+                                                        ('production','Production Pitch'),
+                                                        ('promotion','Promotion Pitch')], validators=[Required()])
     author = StringField('Author', validators=[Required()])
     pitch = TextAreaField('Pitch', validators=[Required()])
     submit = SubmitField('Submit')

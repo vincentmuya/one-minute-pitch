@@ -1,8 +1,42 @@
 {% extends 'base.html'%}
+{% import 'macros.html' as macro%}
 
 {% block content%}
 <h5><em>Click To Create a Pitch</em></h5>
-<button type="button" name="button"><a href="/pitch/new/">Create a Pitch</a></button>
+<button type="button" name="button"><a href="/create/new">Create a Pitch</a></button>
 
+<div class="container">
+
+
+
+  <div class="tabs">
+     <div class="row">
+       <div class="col-md-2">
+         <h4>Category</h4>
+       <h5>life</h5>
+     </div>
+     <ul>
+  {{macro.displayPitchList(life)}}
+  </ul>
+  <div class="col-md-10">
+  </div>
+  </div>
+  </div>
+
+<div class="tabs">
+   <div class="row">
+     <div class="col-md-2">
+      <h4>Category</h4>
+     <h5>Music</h5>
+   </div>
+ <ul>
+{{macro.displayPitchList(music)}}
+</ul>
+    <div class="col-md-10">
+  </div>
+</div>
+</div>
+
+</div>
   {% include 'footer.html' %}
 {%endblock%}

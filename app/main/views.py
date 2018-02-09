@@ -1,34 +1,45 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from app.models import Pitches
-from flask_login import login_required,login_manager
+from flask_login import login_required,login_manager,current_user
 from app.models import Pitches
 from .forms import PitchForm,UpdateProfile
 from .. import db,photos
 
 
-@main.route('/')
+@main.route('/',methods=['GET','POST'])
 def index():
 
     '''
     View root page function that returns the index page and its data
     '''
 
+    music=Pitches.query.filter_by(category='music').all()
+    life=Pitches.query.filter_by(category='life').all()
+
+
     title = 'Home - One Minute Pitch'
-    return render_template('index.html', title = title)
+    return render_template('index.html', title = title,life=life,music = music)
 
-@main.route('/pitch/new/',methods = ['GET','POST'])
+@main.route('/create/new', methods = ['GET','POST'])
 @login_required
-def new_pitch():
+def create():
+    '''
+    View page that returns a form to create your own pitch
+    '''
     form = PitchForm()
-
     if form.validate_on_submit():
-        title = form.title.data
+        author = form.author.data
+        category = form.category.data
         pitch = form.pitch.data
-        new_pitch = Pitch(pitch.id,author,pitch)
+        new_pitch = Pitches(author=author,category=category,pitch=pitch)
+
+        #save pitch method
         new_pitch.save_pitch()
-        return redirect(url_for('pitch'))
-    return render_template('new_pitch.html',pitch_form=form)
+        return redirect(url_for('main.index'))
+    title = 'One Minute Pitch'
+    music=Pitches.query.filter_by(category='music').all()
+    return render_template('new_pitch.html',title=title,pitch_form=form)
 
 @main.route('/user/<uname>')
 @login_required

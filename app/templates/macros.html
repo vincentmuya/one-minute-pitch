@@ -1,5 +1,7 @@
-{% macro displayPitcheList(pitch_list) %}
+{% macro displayPitchList(pitch_list) %}
 
-  <!-- {% for pitch in pitch_list %}
-  <li>{{pitch.author}}</li>
-  {% endmacro %} -->
+  {% for pitch in pitch_list %}
+  <li>Author:{{pitch.author}}</li>
+  <li>Pitch:{{pitch.pitch}}</li>
+  {% endfor %}
+  {% endmacro %}
