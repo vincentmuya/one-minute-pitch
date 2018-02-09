@@ -7,36 +7,96 @@
 
 <div class="container">
 
-
-
+  <div class="tabs">
+     <div class="row">
+       <div class="col-md-2">
+        <h4>Category</h4>
+       <h5>Pickup</h5>
+     </div>
+   <ul id="pickup">
+  {{macro.displayPitchList(pickup)}}
+  </ul>
+      <div class="col-md-10">
+    </div>
+  </div>
+  </div>
+<hr>
+<br>
   <div class="tabs">
      <div class="row">
        <div class="col-md-2">
          <h4>Category</h4>
        <h5>life</h5>
      </div>
-     <ul>
+     <ul id="life">
   {{macro.displayPitchList(life)}}
   </ul>
   <div class="col-md-10">
   </div>
   </div>
   </div>
-
+<hr>
+<br>
 <div class="tabs">
    <div class="row">
      <div class="col-md-2">
       <h4>Category</h4>
      <h5>Music</h5>
    </div>
- <ul>
+ <ul id="music">
 {{macro.displayPitchList(music)}}
 </ul>
     <div class="col-md-10">
   </div>
 </div>
 </div>
-
+<hr>
+<br>
+<div class="tabs">
+   <div class="row">
+     <div class="col-md-2">
+      <h4>Category</h4>
+     <h5>Interview</h5>
+   </div>
+ <ul id="interview">
+{{macro.displayPitchList(interview)}}
+</ul>
+    <div class="col-md-10">
+  </div>
+</div>
+</div>
+<hr>
+<br>
+<div class="tabs">
+   <div class="row">
+     <div class="col-md-2">
+      <h4>Category</h4>
+     <h5>Promotion</h5>
+   </div>
+ <ul id="promotion">
+{{macro.displayPitchList(promotion)}}
+</ul>
+    <div class="col-md-10">
+  </div>
+</div>
+</div>
+<hr>
+<br>
+<div class="tabs">
+   <div class="row">
+     <div class="col-md-2">
+      <h4>Category</h4>
+     <h5>Production</h5>
+   </div>
+ <ul id="production">
+{{macro.displayPitchList(production)}}
+</ul>
+    <div class="col-md-10">
+  </div>
+</div>
+</div>
+<hr>
+<br>
 </div>
   {% include 'footer.html' %}
 {%endblock%}

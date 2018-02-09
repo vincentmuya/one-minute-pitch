@@ -16,10 +16,13 @@ def index():
 
     music=Pitches.query.filter_by(category='music').all()
     life=Pitches.query.filter_by(category='life').all()
-
+    pickup=Pitches.query.filter_by(category='pickup').all()
+    interview=Pitches.query.filter_by(category='interview').all()
+    production=Pitches.query.filter_by(category='production').all()
+    promotion=Pitches.query.filter_by(category='promotion').all()
 
     title = 'Home - One Minute Pitch'
-    return render_template('index.html', title = title,life=life,music = music)
+    return render_template('index.html', title = title,life=life,music = music,pickup=pickup,interview=interview,production=production,promotion=promotion)
 
 @main.route('/create/new', methods = ['GET','POST'])
 @login_required

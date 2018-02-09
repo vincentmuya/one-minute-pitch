@@ -15,23 +15,29 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">PickUp Pitches</a>
+        <a class="nav-link" href="/#pickup">PickUp Pitches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#">Interview Pitches</a>
+        <a class="nav-link" href="/#music">Music Pitches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#">Production Pitches</a>
+        <a class="nav-link" href="/#life">Life Pitches</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#">Promotion Pitches</a>
+        <a class="nav-link " href="/#interview">Interview Pitches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/#production">Production Pitches</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/#promotion">Promotion Pitches</a>
       </li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
      {% if current_user.is_authenticated %}
      <li>{{current_user.username}}</li>
-     <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+     <li><button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{url_for('auth.logout')}}">Sign out</a></button></li>
      {% else %}
      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Sign in</a></button>
 
