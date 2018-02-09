@@ -1,6 +1,7 @@
 {% extends './base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
 
+
 {% block content%}
 
 <div class="container">
@@ -18,8 +19,15 @@
 
       {% endfor %}
       <!-- Login form  -->
-
+      <div class="tabs">
+         <div class="row">
+           <div class="col-md-2">
+             </div>
       {{ wtf.quick_form(login_form) }}
+      <div class="col-md-10">
+    </div>
+  </div>
+  </div>
 
       <p> Don't  have an account?  <a href="{{url_for('auth.register')}}">Sign up here</a></p>
 
