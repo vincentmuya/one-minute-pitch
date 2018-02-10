@@ -17,7 +17,7 @@ class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you',validators = [Required()])
     submit = SubmitField('Submit')
 
-class CommentForm(FlaskForm):
-    author = SelectField('Author', validators=[Required()])
-    comment = SelectField('Comment', validators=[Required()])
+class FeedbackForm(FlaskForm):
+    author = StringField('Author', validators=[Required()])
+    comment = TextAreaField('Feedback', validators=[Required()])
     submit= SubmitField('Submit')

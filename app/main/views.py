@@ -3,7 +3,7 @@ from . import main
 from app.models import Pitches
 from flask_login import login_required,login_manager,current_user
 from app.models import Pitches
-from .forms import CommentForm,PitchForm,UpdateProfile
+from .forms import FeedbackForm,PitchForm,UpdateProfile
 from .. import db,photos
 
 
@@ -13,12 +13,7 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    form= CommentForm()
-    if form.validate_on_submit():
-        comment = form.comment.data
-        new_comment = Comment(comment=comment)
-        new_comment.save_pitch()
-        return redirect(url_for('main.index'))
+
 
     music=Pitches.query.filter_by(category='music').all()
     life=Pitches.query.filter_by(category='life').all()
@@ -28,7 +23,7 @@ def index():
     promotion=Pitches.query.filter_by(category='promotion').all()
 
     title = 'Home - One Minute Pitch'
-    return render_template('index.html', title = title,life=life,music = music,pickup=pickup,interview=interview,production=production,promotion=promotion,comment_form=form)
+    return render_template('index.html', title = title,life=life,music = music,pickup=pickup,interview=interview,production=production,promotion=promotion)
 
 @main.route('/create/new', methods = ['GET','POST'])
 @login_required
@@ -49,6 +44,24 @@ def create():
     title = 'One Minute Pitch'
     music=Pitches.query.filter_by(category='music').all()
     return render_template('new_pitch.html',title=title,pitch_form=form)
+
+@main.route('/feedback/new',methods= ['GET','POST'])
+@login_required
+def feedback():
+    '''
+    View page that returns a form to create your own feedback
+    '''
+    form = FeedbackForm()
+    if form.validate_on_submit():
+        author = form.author.data
+        feedback= form.feedback.data
+        new_feedback = Feedback(author=author,feedback= feedback)
+
+        #save feedback methods
+        new_feedback.save_feedback()
+        return redirect(url_for('main.index'))
+    title = 'One Minute Pitch'
+    return render_template('new_feedback.html',title= title,feeback_form = form)
 
 @main.route('/user/<uname>')
 @login_required

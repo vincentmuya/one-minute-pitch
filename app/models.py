@@ -37,25 +37,22 @@ class Pitches(db.Model):
         self.author = author
         self.pitch = pitch
 
-class Comment(db.Model):
-    __tablename__='comments'
+class Feedback(db.Model):
+    __tablename__='feedback'
 
     id = db.Column(db.Integer,primary_key = True)
     author = db.Column(db.String(225))
-    comment = db.Column(db.String())
+    feedback = db.Column(db.String())
 
-    def save_comment(self):
+    def save_feedback(self):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_comment(cls,category):
-        comment = Comment.query.filter_by().all
-        return comment
 
-    def __init__(self,author,comment):
+
+    def __init__(self,author,feedback):
         self.author = author
-        self.comment = comment
+        self.feedback = feedback
 
 
 class User(UserMixin,db.Model):

@@ -1,13 +1,7 @@
-{% import "bootstrap/wtf.html" as wtf %}
 {% macro displayPitchList(pitch_list) %}
 
-    {% for pitch in pitch_list %}
-    <li>Author:{{pitch.author}}</li>
-    <li>Pitch:{{pitch.pitch}}</li>
-    {% endfor %}
-
-    {% for comment in comment_list %}
-    <li>Author:{{comment.author}}</li>
-    <li>Comment:{{comment.comment}}</li>
-      {% endfor %}
-      {% endmacro %}
+  {% for pitch in pitch_list %}
+  <li>Author:{{pitch.author}}</li>
+  <li>Pitch:{{pitch.pitch}}</li>
+  {% endfor %}
+  {% endmacro %}
