@@ -53,7 +53,7 @@ def create():
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
-    user = User.query.filter_by(uname = uname).first()
+    user = User.query.filter_by(username = uname).first()
 
     if user is none:
         abort(404)
