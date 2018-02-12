@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from app.models import Pitches
+from app.models import Pitches,Feedback
 from flask_login import login_required,login_manager,current_user
-from app.models import Pitches
+from app.models import Pitches,User
 from .forms import FeedbackForm,PitchForm,UpdateProfile
 from .. import db,photos
 
@@ -61,22 +61,22 @@ def feedback():
         new_feedback.save_feedback()
         return redirect(url_for('main.index'))
     title = 'One Minute Pitch'
-    return render_template('new_feedback.html',title= title,feeback_form = form)
+    return render_template('new_feedback.html',title= title,feedback_form = form)
 
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
-    if user is none:
+    if user is None:
         abort(404)
+
     return render_template("profile/profile.html", user = user)
 
-@main.route('/user/<uname>/update',methods = ["GET","POST"])
-@login_required
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
-    if user is none:
+    if user is None:
         abort(404)
 
     form = UpdateProfile()
@@ -88,14 +88,15 @@ def update_profile(uname):
         db.session.commit()
 
         return redirect(url_for('.profile',uname=user.username))
+
     return render_template('profile/update.html',form =form)
 
-@main.route('/user/<uname>/update/pic',methods=['POST'])
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
-    user = User.query.filter_by(username= uname).first()
+    user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
-        filename =photos.save(request.file['photo'])
+        filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()

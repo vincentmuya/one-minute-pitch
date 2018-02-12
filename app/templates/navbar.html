@@ -37,11 +37,11 @@
     <ul class="nav navbar-nav navbar-right">
      {% if current_user.is_authenticated %}
      <li>{{current_user.username}}</li>
-     <li><button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{url_for('auth.logout')}}">Sign out</a></button></li>
-     {% else %}
-     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Sign in</a></button>
-
-     {%endif%}
-   </ul>
+   <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
+   <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+   {% else %}
+   <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+   {%endif%}
+     </ul>
   </div>
 </nav>

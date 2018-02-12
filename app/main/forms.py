@@ -19,5 +19,5 @@ class UpdateProfile(FlaskForm):
 
 class FeedbackForm(FlaskForm):
     author = StringField('Author', validators=[Required()])
-    comment = TextAreaField('Feedback', validators=[Required()])
+    feedback = TextAreaField('Feedback', validators=[Required()])
     submit= SubmitField('Submit')
